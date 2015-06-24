@@ -1,0 +1,53 @@
+body {
+  text-align: center;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 100px;
+  background-color: #66E0A3;
+}
+
+button {
+  margin: 5px 5px 10px 5px;
+}
+
+.button {
+  margin: 10px 10px 10px 10px;
+  height: 100px;
+  width: 100px;
+  /* border-radius: 50%; */
+  background-color: red;
+  text-align: center;
+}
+
+.canvas {
+  border: 5px solid #0066CC;
+  background-color: #202020;
+  border-radius: 15px;
+}
+
+label:hover {
+  background-color: yellow;
+}
+
+#block {
+  margin: 25px 25px 25px 25px;
+  height: 10px;
+  width:10px;
+  padding: 25px 25px 25px 25px;
+  background-color: red;
+}
+
+#circle {
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+  border-style: solid;
+  border-width: medium;
+  border-color: rgba(100, 0, 255, 0.5);
+  background-color: rgba(0, 0, 255, 0.5);
+}
+
+#circle:hover {
+  border-color: rgba(100, 0, 255, 1);
+  box-shadow: 0px 0px 50px 20px rgba(255, 255, 0, 1);
+}
