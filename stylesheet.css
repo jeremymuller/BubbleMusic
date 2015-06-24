@@ -36,7 +36,7 @@ label:hover {
   padding: 25px 25px 25px 25px;
   background-color: red;
 }
-
+/*
 #circle {
   height: 100px;
   width: 100px;
@@ -45,7 +45,7 @@ label:hover {
   border-width: medium;
   border-color: rgba(100, 0, 255, 0.5);
   background-color: rgba(0, 0, 255, 0.5);
-}
+}*/
 
 #circle:hover {
   border-color: rgba(100, 0, 255, 1);

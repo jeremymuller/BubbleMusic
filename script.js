@@ -21,7 +21,6 @@ var MODE = ionian;
 var chord = [48, 50, 52, 53, 55, 57, 59, 60, 62, 64, 65, 67];
 var recentPitches = [MODE[0], MODE[2], MODE[4]]; // TODO
 
-var canvasRhythm = new Canvas("rhythm");
 var canvasMelody = new Canvas("melody");
 var canvasHarmony = new Canvas("harmony");
 
@@ -158,9 +157,6 @@ var harmony = new Circle(col.stroke, col.fill, 20, canvasHarmony, "harmony", can
 
 var col1 = colors();
 var col2 = colors();
-var rhythmSD = new Circle(col1.stroke, col1.fill, 1, canvasRhythm, "rhythm", canvasRhythm.width/2);
-var rhythmBD = new Circle(col2.stroke, col2.fill, 0, canvasRhythm, "rhythm", canvasRhythm.width/2);
-var rhythmBD2 = new Circle(col2.stroke, col2.fill, 0, canvasRhythm, "rhythm", canvasRhythm.width/2);
 
 for (var i in circles) {
   var j = parseInt(i) + 1;
@@ -168,6 +164,8 @@ for (var i in circles) {
 }
 
 document.body.onload = function() { draw();};
+
+// move button
 document.getElementById("move").onclick = function() {
 
 
@@ -194,17 +192,20 @@ document.getElementById("move").onclick = function() {
   harmony.direction.x = x;
   harmony.direction.y = y;
 
-  // rhythmSD.direction.x = Math.random() * SPEED + 1;
-  //rhythmSD.direction.y = 0.5;
-
-  //rhythmBD.direction.y = 2;
-  //rhythmBD2.direction.y = 1;
-
   //circle1.direction[0] = Math.random() * 2 + 1;
   //circle1.direction[1] = Math.random() * 2 + 1;
   //circle2.direction[0] = Math.random() * 2 + 1;
   //circle2.direction[1] = Math.random() * 2 + 1;
-  };
+};
+
+document.getElementById("stop").onclick = function() {
+    for (var i in circles) {
+        circles[i].direction.y = velocities[0];
+    }
+    harmony.direction.x = 0;
+    harmony.direction.y = 0;
+};
+
 
 function detectCollision() {
   // get all objects' positions and test if any are colliding
@@ -274,7 +275,6 @@ function mouseLoc(event) {
 function redraw() {
   canvasMelody.ctx.clearRect(0, 0, canvasMelody.width, canvasMelody.height);
   canvasHarmony.ctx.clearRect(0, 0, canvasMelody.width, canvasMelody.height);
-  canvasRhythm.ctx.clearRect(0, 0, canvasMelody.width, canvasMelody.height);
 }
 
 // animation handling
@@ -284,13 +284,6 @@ function draw() {
 
     // drawing code goes here
     redraw();
-
-    rhythmSD.drawCircle(canvasRhythm.ctx);
-    rhythmBD.drawCircle(canvasRhythm.ctx);
-    rhythmBD2.drawCircle(canvasRhythm.ctx);
-    rhythmSD.move();
-    rhythmBD.move();
-    rhythmBD2.move();
 
     harmony.drawCircle(canvasHarmony.ctx);
     harmony.move();
