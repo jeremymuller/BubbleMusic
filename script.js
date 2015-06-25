@@ -4,7 +4,7 @@ var PADDING = 25;
 var START_DIRECTION = 'RANDOM';
 var CIRCLE_EDGE = '0.75';
 var CIRCLE_FILL = '0.5';
-var SPEED = 0.01;
+var SPEED = 0.1;
 var OCTAVE = 1; // 0 is original, 1 is 8va
 
 var accelRate = 0.99;
@@ -29,7 +29,6 @@ function Circle(strokeStyle, fillStyle, size, canvas, type, initX) {
 
   this.canvas = canvas;
 
-  // TODO: sometimes will not register an x or y position???
   // var x = Math.floor(Math.random() * canvas.width % canvas.width);
   // var y = Math.floor(Math.random() * this.canvas.height);
   var y = this.canvas.height/2;
@@ -167,39 +166,61 @@ document.body.onload = function() { draw();};
 
 // move button
 document.getElementById("move").onclick = function() {
+    var inputElement = document.getElementsByClassName("checkbox");
 
+    if (inputElement[0].checked) {
+        for (var i in circles) {
+        // circles[i].direction.x = Math.random() * SPEED + 1;
+        // circles[i].direction.y = Math.random() * (SPEED + 1); // velocity of each circles
+        var x = Math.floor(Math.random() * velocities.length);
+        var y = Math.floor(Math.random() * velocities.length);
+        circles[i].direction.x = velocities[x]
+        circles[i].direction.y = velocities[y];
+        //circles[i].direction.y = velocities[i] % velocities.length;
+        }
+    } else {
+        for (var i in circles) {
+        // circles[i].direction.x = Math.random() * SPEED + 1;
+        // circles[i].direction.y = Math.random() * (SPEED + 1); // velocity of each circles
+        var y = Math.floor(Math.random() * velocities.length);
+        circles[i].direction.y = velocities[y];
+        //circles[i].direction.y = velocities[i] % velocities.length;
+        }
+    }
 
-  /*
-  for (var i in circles) {
-    // circles[i].direction.x = Math.random() * SPEED + 1;
-    circles[i].direction.y = Math.random() * (SPEED + 1); // velocity of each circles
-    //circles[i].direction.y = velocities[i] % velocities.length;
-    console.log("velocity: " + circles[i].direction.y);
-  }
-  */
-  circles[0].direction.y = velocities[2];
-  circles[1].direction.y = velocities[1];
-  circles[2].direction.y = velocities[0] * SPEED;
-  circles[3].direction.y = velocities[5];
-  circles[4].direction.y = velocities[0] * SPEED;
-  circles[5].direction.y = velocities[0];
-  circles[6].direction.y = velocities[3];
-  circles[7].direction.y = velocities[8];
+    var x = (Math.random() * 2 - 1) * 0.25;
+    var y = (Math.random() * 2 - 1) * 0.25;
+    harmony.direction.x = x;
+    harmony.direction.y = y;
 
+    /*
+    circles[0].direction.y = velocities[2];
+    circles[1].direction.y = velocities[1];
+    circles[2].direction.y = velocities[0] * SPEED;
+    circles[3].direction.y = velocities[5];
+    circles[4].direction.y = velocities[0] * SPEED;
+    circles[5].direction.y = velocities[0];
+    circles[6].direction.y = velocities[3];
+    circles[7].direction.y = velocities[8];
+    */
 
-  var x = (Math.random() * 2 - 1) * 0.25;
-  var y = (Math.random() * 2 - 1) * 0.25;
-  harmony.direction.x = x;
-  harmony.direction.y = y;
+    //circle1.direction[0] = Math.random() * 2 + 1;
+    //circle1.direction[1] = Math.random() * 2 + 1;
+    //circle2.direction[0] = Math.random() * 2 + 1;
+    //circle2.direction[1] = Math.random() * 2 + 1;
+};
 
-  //circle1.direction[0] = Math.random() * 2 + 1;
-  //circle1.direction[1] = Math.random() * 2 + 1;
-  //circle2.direction[0] = Math.random() * 2 + 1;
-  //circle2.direction[1] = Math.random() * 2 + 1;
+document.getElementById("reset").onclick = function() {
+    for (var i in circles) {
+        var y = canvasMelody.height/2;
+        circles[i].posX = grid[i];
+        circles[i].posY = y;
+    }
 };
 
 document.getElementById("stop").onclick = function() {
     for (var i in circles) {
+        circles[i].direction.x = velocities[0];
         circles[i].direction.y = velocities[0];
     }
     harmony.direction.x = 0;
